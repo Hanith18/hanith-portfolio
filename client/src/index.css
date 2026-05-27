@@ -1,0 +1,369 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* USF Brand Colors: Green #006747 · Gold #B8922A */
+  --bg: #ffffff;
+  --bg-2: #f4f8f6;
+  --bg-alt: #f0f5f2;
+  --bg-card: #ffffff;
+  --purple: #006747;
+  --purple-light: #008a5e;
+  --purple-dim: rgba(0, 103, 71, 0.07);
+  --cyan: #B8922A;
+  --cyan-light: #CFC493;
+  --cyan-dim: rgba(184, 146, 42, 0.07);
+  --amber: #B8922A;
+  --green: #006747;
+  --text: #0d1f18;
+  --text-muted: #5a7268;
+  --text-secondary: #2e4e40;
+  --border: rgba(0, 103, 71, 0.1);
+  --border-strong: rgba(0, 103, 71, 0.22);
+  --border-cyan: rgba(184, 146, 42, 0.2);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-hover: 0 4px 20px rgba(0, 103, 71, 0.12), 0 2px 8px rgba(0,0,0,0.06);
+  --glow-purple: 0 4px 24px rgba(0, 103, 71, 0.14), 0 2px 8px rgba(0,0,0,0.06);
+  --glow-cyan: 0 4px 24px rgba(184, 146, 42, 0.16), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--purple-light); }
+
+/* ─── Selection ─── */
+::selection { background: rgba(0, 103, 71, 0.12); color: var(--text); }
+
+/* ─── Gradient text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 60%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-amber {
+  background: linear-gradient(135deg, #B8922A 0%, #CFC493 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Cards ─── */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.glass-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ─── Accent card — left border variant ─── */
+.accent-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--purple);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.accent-card:hover {
+  border-color: var(--border-strong);
+  border-left-color: var(--purple);
+  box-shadow: var(--shadow-hover);
+}
+
+/* ─── Buttons ─── */
+.btn-primary {
+  background: var(--purple);
+  color: #fff;
+  border: 1px solid var(--purple);
+  border-radius: 8px;
+  padding: 11px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary:hover {
+  background: var(--purple-light);
+  box-shadow: var(--glow-purple);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--purple);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 10px 26px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-outline:hover {
+  background: var(--purple-dim);
+  border-color: var(--purple);
+}
+
+/* ─── Section label ─── */
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--purple);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.85;
+}
+.section-tag::before,
+.section-tag::after {
+  content: '';
+  height: 1px;
+  background: var(--border-strong);
+  flex: 1;
+  max-width: 36px;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+/* ─── Section wrapper ─── */
+.section-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 88px 0;
+}
+.section-wrapper-alt {
+  position: relative;
+  z-index: 1;
+  padding: 88px 0;
+  background: var(--bg-2);
+}
+
+/* ─── Skill badges ─── */
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+  border: 1px solid;
+  transition: all 0.2s;
+}
+.skill-badge-purple {
+  background: var(--purple-dim);
+  color: var(--purple);
+  border-color: rgba(0, 103, 71, 0.22);
+}
+.skill-badge-cyan {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border-color: rgba(184, 146, 42, 0.22);
+}
+.skill-badge-amber {
+  background: rgba(184, 146, 42, 0.07);
+  color: #B8922A;
+  border-color: rgba(184, 146, 42, 0.22);
+}
+.skill-badge-green {
+  background: rgba(0, 103, 71, 0.07);
+  color: #006747;
+  border-color: rgba(0, 103, 71, 0.22);
+}
+
+/* ─── Timeline ─── */
+.timeline-line {
+  width: 2px;
+  background: linear-gradient(to bottom, var(--purple), var(--cyan), transparent);
+}
+
+/* ─── Typewriter cursor ─── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  background: var(--purple);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+  border-radius: 1px;
+}
+
+/* ─── Progress bar ─── */
+.progress-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--purple), var(--purple-light));
+}
+
+/* ─── Roadmap node states ─── */
+.roadmap-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.roadmap-node-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border: 2px solid;
+  transition: all 0.25s;
+  z-index: 2;
+}
+.roadmap-node.past .roadmap-node-circle {
+  background: var(--purple-dim);
+  border-color: var(--purple);
+  box-shadow: 0 0 12px rgba(0, 103, 71, 0.2);
+}
+.roadmap-node.current .roadmap-node-circle {
+  background: rgba(184, 146, 42, 0.1);
+  border-color: var(--cyan);
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%,100% { box-shadow: 0 0 10px rgba(184, 146, 42, 0.35); }
+  50%      { box-shadow: 0 0 24px rgba(184, 146, 42, 0.65); }
+}
+.roadmap-node.future .roadmap-node-circle {
+  background: var(--bg-2);
+  border-color: var(--border-strong);
+  border-style: dashed;
+}
+
+/* ─── Contact form ─── */
+.form-field {
+  position: relative;
+  margin-bottom: 20px;
+}
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: none;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(0, 103, 71, 0.08);
+}
+.form-field label {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  pointer-events: none;
+  transition: all 0.2s;
+  background: transparent;
+}
+.form-field input:focus ~ label,
+.form-field input:not(:placeholder-shown) ~ label,
+.form-field textarea:focus ~ label,
+.form-field textarea:not(:placeholder-shown) ~ label {
+  top: -9px;
+  left: 12px;
+  font-size: 11px;
+  color: var(--purple);
+  background: var(--bg-card);
+  padding: 0 4px;
+  font-weight: 600;
+}
+
+/* ─── Active nav indicator ─── */
+.nav-active {
+  color: var(--purple) !important;
+  font-weight: 700 !important;
+}
+
+/* ─── Divider ─── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-strong), transparent);
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/* ─── Reveal animations ─── */
+.reveal-up { opacity: 0; transform: translateY(24px); }
+.reveal-up.visible { opacity: 1; transform: translateY(0); transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* ─── USF green top accent strip ─── */
+.usf-stripe {
+  height: 4px;
+  background: linear-gradient(to right, var(--purple), var(--purple-light), var(--cyan));
+}
+
+/* ─── Navbar responsive (replaces Tailwind md/lg classes) ─── */
+.nav-desktop { display: none; }
+.nav-mobile-btn { display: flex; }
+
+@media (min-width: 1024px) {
+  .nav-desktop { display: flex; align-items: center; }
+  .nav-mobile-btn { display: none; }
+}
