@@ -17,6 +17,7 @@ import SplashScreen from './components/SplashScreen'
 import ScrollProgress from './components/ScrollProgress'
 import BackToTop from './components/BackToTop'
 import CustomCursor from './components/CustomCursor'
+import BinaryBackground from './components/BinaryBackground'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 
 export default function App() {
@@ -24,11 +25,12 @@ export default function App() {
 
   return (
     <>
+      <BinaryBackground />
       <CustomCursor />
       <SplashScreen onDone={() => setSplashDone(true)} />
       <ScrollProgress />
       <Navbar />
-      <main>
+      <main style={{ position: 'relative', zIndex: 1 }}>
         <Hero />
         <About />
         <Skills />
@@ -48,7 +50,7 @@ export default function App() {
         borderTop: '1px solid var(--border)',
         background: 'var(--bg-2)',
         padding: '40px 24px',
-        position: 'relative', zIndex: 10,
+        position: 'relative', zIndex: 2,
       }}>
         <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
           {/* Name + credentials */}
