@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import useMobile from '../hooks/useMobile'
 
 /* ─── Data ──────────────────────────────────────────────── */
 const CLUSTER_META = {
@@ -78,6 +79,7 @@ export default function SkillConstellation() {
   const { ref: sectionRef, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
   const [hoveredCluster, setHoveredCluster] = useState(null)
   const [started, setStarted] = useState(false)
+  const isMobile = useMobile()
 
   // Build index maps once
   const skillIndex = Object.fromEntries(SKILLS.map((s, i) => [s.id, i]))
@@ -222,6 +224,15 @@ export default function SkillConstellation() {
   function onMouseLeave() {
     mouseRef.current = { x: -9999, y: -9999 }
   }
+  function onTouchMove(e) {
+    e.preventDefault()
+    const rect = e.currentTarget.getBoundingClientRect()
+    const t = e.touches[0]
+    mouseRef.current = { x: t.clientX - rect.left, y: t.clientY - rect.top }
+  }
+  function onTouchEnd() {
+    mouseRef.current = { x: -9999, y: -9999 }
+  }
 
   return (
     <section id="skills-constellation" className="section-wrapper"
@@ -258,6 +269,7 @@ export default function SkillConstellation() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
+          className="constellation-legend"
           style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center', marginBottom: 20 }}
         >
           {Object.entries(CLUSTER_META).map(([key, { label, color }]) => (
@@ -281,7 +293,7 @@ export default function SkillConstellation() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
           style={{
-            width: '100%', height: 480,
+            width: '100%', height: isMobile ? 300 : 480,
             borderRadius: 16,
             border: '1px solid var(--border)',
             background: 'rgba(255,255,255,0.02)',
@@ -290,6 +302,8 @@ export default function SkillConstellation() {
           }}
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
         >
           <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%' }} />
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import useMobile from '../hooks/useMobile'
 import { motion } from 'framer-motion'
 import { Link } from 'react-scroll'
 import {
@@ -63,6 +64,7 @@ const SOCIALS = [
 
 export default function Hero() {
   const [imgError, setImgError] = useState(false)
+  const isMobile = useMobile()
 
   return (
     <section
@@ -82,23 +84,23 @@ export default function Hero() {
       <div className="usf-stripe" style={{ position: 'absolute', top: 0, left: 0, right: 0 }} />
 
       <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto' }}>
-        <div style={{
+        <div className="hero-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'auto 1fr',
-          gap: 56,
+          gridTemplateColumns: isMobile ? '1fr' : 'auto 1fr',
+          gap: isMobile ? 28 : 56,
           alignItems: 'center',
         }}>
 
           {/* ── LEFT: Photo + Socials ── */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}
           >
             {/* Photo */}
-            <div style={{
-              width: 220, height: 220,
+            <div className="hero-photo" style={{
+              width: isMobile ? 150 : 220, height: isMobile ? 150 : 220,
               borderRadius: '50%',
               border: '3px solid var(--purple)',
               overflow: 'hidden',
@@ -173,7 +175,7 @@ export default function Hero() {
 
           {/* ── RIGHT: Info ── */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             style={{ display: 'flex', flexDirection: 'column', gap: 18 }}
@@ -262,12 +264,12 @@ export default function Hero() {
             </div>
 
             {/* Stats strip */}
-            <div style={{
-              display: 'grid', gridTemplateColumns: 'repeat(4,1fr)',
+            <div className="hero-stats" style={{
+              display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4,1fr)',
               background: 'var(--bg-2)',
               border: '1px solid var(--border)',
               borderRadius: 10, overflow: 'hidden',
-              maxWidth: 480,
+              maxWidth: isMobile ? '100%' : 480,
             }}>
               {[
                 { label: 'Experience', value: '3+ yrs' },

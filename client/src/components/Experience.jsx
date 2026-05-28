@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
+import useMobile from '../hooks/useMobile'
 
 const CURVE = 'M 90,250 C 220,250 330,165 480,165 C 630,165 740,80 870,80'
 
@@ -90,6 +91,7 @@ function MetricCount({ value }) {
 export default function Experience() {
   const [active, setActive] = useState(1)
   const sectionRef = useRef(null)
+  const isMobile = useMobile()
   const inView = useInView(sectionRef, { once: true, margin: '-80px' })
 
   // unique id for SVG defs
@@ -130,7 +132,7 @@ export default function Experience() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div style={{ width: '100%', overflowX: 'auto' }}>
+          <div className="experience-svg-wrap" style={{ width: '100%', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
             <svg
               viewBox="0 0 960 330"
               style={{ width: '100%', minWidth: 580, display: 'block', overflow: 'visible' }}
@@ -336,7 +338,7 @@ export default function Experience() {
                   border: `1px solid ${job.color}28`,
                   borderLeft: `4px solid ${job.color}`,
                   borderRadius: 14,
-                  padding: '28px 32px',
+                  padding: isMobile ? '20px 16px' : '28px 32px',
                   boxShadow: `0 4px 32px ${job.color}12`,
                 }}
               >

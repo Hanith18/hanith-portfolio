@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import useMobile from '../hooks/useMobile'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FaEnvelope, FaLinkedin, FaMapMarkerAlt, FaPhone, FaPaperPlane, FaCheckCircle, FaTimesCircle } from 'react-icons/fa'
@@ -50,6 +51,7 @@ const CONTACT_INFO = [
 ]
 
 export default function Contact() {
+  const isMobile = useMobile()
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.05 })
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
@@ -203,7 +205,7 @@ export default function Contact() {
                 <form onSubmit={handleSubmit}>
                   <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 24 }}>Send a Message</h3>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 16px' }}>
+                  <div className="contact-form-row" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '0 16px' }}>
                     <div className="form-field">
                       <input
                         type="text" name="name" value={form.name}

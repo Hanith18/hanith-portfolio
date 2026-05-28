@@ -7,11 +7,12 @@ function randomBetween(a, b) {
 }
 
 function createParticle(canvasW, canvasH, fromTop = false) {
+  const mobile = canvasW < 768
   return {
     x: randomBetween(0, canvasW),
     y: fromTop ? randomBetween(-120, 0) : randomBetween(0, canvasH),
     char: Math.random() > 0.5 ? '1' : '0',
-    size: randomBetween(10, 22),
+    size: mobile ? randomBetween(8, 15) : randomBetween(10, 22),
     speed: randomBetween(0.18, 0.72),
     opacity: randomBetween(0.04, 0.18),
     drift: randomBetween(-0.12, 0.12),
@@ -33,17 +34,19 @@ export default function BinaryBackground() {
     let animId
     let particles = []
 
-    const PARTICLE_COUNT = 110
+    const isMobile = window.innerWidth < 768
+    const PARTICLE_COUNT = isMobile ? 45 : 110
 
     function resize() {
-      const dpr = window.devicePixelRatio || 1
+      const dpr = Math.min(window.devicePixelRatio || 1, 2) // cap at 2x for perf
       canvas.width = window.innerWidth * dpr
       canvas.height = window.innerHeight * dpr
       canvas.style.width = window.innerWidth + 'px'
       canvas.style.height = window.innerHeight + 'px'
       ctx.scale(dpr, dpr)
+      const count = window.innerWidth < 768 ? 45 : PARTICLE_COUNT
       // Rebuild particles to fit new canvas
-      particles = Array.from({ length: PARTICLE_COUNT }, () =>
+      particles = Array.from({ length: count }, () =>
         createParticle(window.innerWidth, window.innerHeight)
       )
     }

@@ -367,3 +367,79 @@ body {
   .nav-desktop { display: flex; align-items: center; }
   .nav-mobile-btn { display: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE  (≤ 768 px)
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Section padding ── */
+  .section-wrapper,
+  .section-wrapper-alt {
+    padding: 56px 0;
+  }
+
+  /* ── Section title ── */
+  .section-title {
+    font-size: clamp(24px, 7vw, 34px);
+  }
+
+  /* ── Cards ── */
+  .glass-card { border-radius: 10px; }
+
+  /* ── Hero grid → stack ── */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  .hero-photo {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    max-width: 100% !important;
+  }
+
+  /* ── Contact form: name + email stack ── */
+  .contact-form-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Experience SVG: allow horizontal scroll ── */
+  .experience-svg-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ── SRE Dashboard ── */
+  .sre-status-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  /* ── Skill constellation legend ── */
+  .constellation-legend {
+    flex-wrap: wrap;
+    gap: 6px !important;
+  }
+
+  /* ── Binary background: fewer particles via CSS hint ── */
+  /* (particle count controlled in JS via matchMedia) */
+
+  /* ── General overflow guard ── */
+  section { overflow-x: hidden; }
+  img     { max-width: 100%; }
+}
+
+/* ─── Very small phones (≤ 400 px) ─── */
+@media (max-width: 400px) {
+  body { font-size: 14px; }
+
+  .section-wrapper,
+  .section-wrapper-alt { padding: 44px 0; }
+
+  .btn-primary,
+  .btn-outline { padding: 10px 18px; font-size: 13px; }
+}
