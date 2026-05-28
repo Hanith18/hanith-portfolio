@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import useMobile from '../hooks/useMobile'
+import ScrambleText from './ScrambleText'
 import { motion } from 'framer-motion'
 import { Link } from 'react-scroll'
 import {
@@ -78,12 +79,41 @@ export default function Hero() {
         padding: '100px 24px 60px',
         background: 'var(--bg)',
         borderBottom: '1px solid var(--border)',
+        overflow: 'hidden',
       }}
     >
       {/* Subtle green accent strip at very top */}
       <div className="usf-stripe" style={{ position: 'absolute', top: 0, left: 0, right: 0 }} />
 
-      <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto' }}>
+      {/* ── Aurora gradient blobs ── */}
+      <div className="no-theme-transition" style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+        {/* Blob 1 — large USF green */}
+        <div style={{
+          position: 'absolute', top: '-10%', left: '-5%',
+          width: 600, height: 600, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(0,103,71,0.28) 0%, transparent 70%)',
+          animation: 'auroraFloat1 14s ease-in-out infinite',
+          filter: 'blur(40px)',
+        }} />
+        {/* Blob 2 — gold */}
+        <div style={{
+          position: 'absolute', top: '20%', right: '-8%',
+          width: 500, height: 500, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(184,146,42,0.22) 0%, transparent 70%)',
+          animation: 'auroraFloat2 18s ease-in-out infinite',
+          filter: 'blur(50px)',
+        }} />
+        {/* Blob 3 — bright green accent */}
+        <div style={{
+          position: 'absolute', bottom: '5%', left: '35%',
+          width: 400, height: 400, borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(0,168,107,0.18) 0%, transparent 70%)',
+          animation: 'auroraFloat3 22s ease-in-out infinite',
+          filter: 'blur(60px)',
+        }} />
+      </div>
+
+      <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div className="hero-grid" style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : 'auto 1fr',
@@ -190,7 +220,12 @@ export default function Hero() {
                 lineHeight: 1.1,
                 marginBottom: 4,
               }}>
-                Hanith Sai Kumar Reddy Pulimi
+                <ScrambleText
+                  text="Hanith Sai Kumar Reddy Pulimi"
+                  speed={28}
+                  delay={600}
+                  style={{ fontFamily: 'inherit', fontWeight: 'inherit', fontSize: 'inherit', letterSpacing: 'inherit' }}
+                />
               </h1>
               <div style={{ fontSize: 'clamp(15px, 2vw, 18px)', color: 'var(--text-muted)', fontFamily: 'JetBrains Mono', marginBottom: 8 }}>
                 <Typewriter words={ROLES} />

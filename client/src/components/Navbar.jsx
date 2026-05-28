@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-scroll'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
+import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
   { label: 'About',      to: 'about' },
@@ -31,7 +32,7 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: '#ffffff',
+        background: 'var(--bg)',
         borderBottom: scrolled
           ? '1px solid var(--border-strong)'
           : '1px solid var(--border)',
@@ -116,22 +117,25 @@ export default function Navbar() {
           >
             Hire Me
           </a>
+          <ThemeToggle />
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="nav-mobile-btn"
-          style={{
-            background: 'none', border: '1px solid var(--border)',
-            borderRadius: 7, padding: '6px 8px',
-            color: 'var(--text)', cursor: 'pointer', fontSize: 20,
-            display: 'flex', alignItems: 'center',
-          }}
-          aria-label="Toggle menu"
-        >
-          {open ? <HiX /> : <HiMenuAlt3 />}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} className="nav-mobile-btn">
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen(!open)}
+            style={{
+              background: 'none', border: '1px solid var(--border)',
+              borderRadius: 7, padding: '6px 8px',
+              color: 'var(--text)', cursor: 'pointer', fontSize: 20,
+              display: 'flex', alignItems: 'center',
+            }}
+            aria-label="Toggle menu"
+          >
+            {open ? <HiX /> : <HiMenuAlt3 />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -142,7 +146,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             style={{
-              background: '#ffffff',
+              background: 'var(--bg)',
               borderTop: '1px solid var(--border)',
               boxShadow: '0 8px 24px rgba(0,0,0,0.06)',
               padding: '12px 24px 20px',

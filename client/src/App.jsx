@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Lenis from 'lenis'
+import { ThemeProvider } from './context/ThemeContext'
+import NoiseOverlay from './components/NoiseOverlay'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -20,11 +23,25 @@ import CustomCursor from './components/CustomCursor'
 import BinaryBackground from './components/BinaryBackground'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 
-export default function App() {
+function AppInner() {
   const [splashDone, setSplashDone] = useState(false)
+
+  // ── Lenis ultra-smooth scroll ──
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+    })
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf) }
+    requestAnimationFrame(raf)
+    return () => lenis.destroy()
+  }, [])
 
   return (
     <>
+      <NoiseOverlay />
       <BinaryBackground />
       <CustomCursor />
       <SplashScreen onDone={() => setSplashDone(true)} />
@@ -78,7 +95,7 @@ export default function App() {
                 title={label}
                 style={{
                   width: 36, height: 36, borderRadius: 7,
-                  background: '#fff',
+                  background: 'var(--bg-2)',
                   border: '1px solid var(--border)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'var(--text-muted)', transition: 'all 0.2s',
@@ -92,7 +109,7 @@ export default function App() {
                 onMouseLeave={e => {
                   e.currentTarget.style.color = 'var(--text-muted)'
                   e.currentTarget.style.borderColor = 'var(--border)'
-                  e.currentTarget.style.background = '#fff'
+                  e.currentTarget.style.background = 'var(--bg-2)'
                 }}
               >
                 <Icon size={15} />
@@ -107,5 +124,13 @@ export default function App() {
         </div>
       </footer>
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppInner />
+    </ThemeProvider>
   )
 }
