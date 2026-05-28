@@ -5,9 +5,9 @@ const ThemeCtx = createContext({ dark: false, toggle: () => {} })
 export function ThemeProvider({ children }) {
   const [dark, setDark] = useState(() => {
     try {
+      // Always default to light — dark only if visitor explicitly chose it before
       const stored = localStorage.getItem('theme')
-      if (stored) return stored === 'dark'
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
+      return stored === 'dark'
     } catch { return false }
   })
 
