@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-scroll'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
-import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
   { label: 'About',      to: 'about' },
@@ -117,12 +116,10 @@ export default function Navbar() {
           >
             Hire Me
           </a>
-          <ThemeToggle />
         </div>
 
-        {/* Mobile: theme toggle + hamburger */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} className="nav-mobile-btn">
-          <ThemeToggle />
+        {/* Mobile hamburger */}
+        <div className="nav-mobile-btn">
           <button
             onClick={() => setOpen(!open)}
             style={{
@@ -137,6 +134,7 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
 
       {/* Mobile menu */}
       <AnimatePresence>

@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
 import Lenis from 'lenis'
-import { ThemeProvider } from './context/ThemeContext'
-import NoiseOverlay from './components/NoiseOverlay'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -41,7 +39,6 @@ function AppInner() {
 
   return (
     <>
-      <NoiseOverlay />
       <BinaryBackground />
       <CustomCursor />
       <SplashScreen onDone={() => setSplashDone(true)} />
@@ -128,9 +125,5 @@ function AppInner() {
 }
 
 export default function App() {
-  return (
-    <ThemeProvider>
-      <AppInner />
-    </ThemeProvider>
-  )
+  return <AppInner />
 }

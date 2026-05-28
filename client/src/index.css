@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Light mode (default) ── */
 :root {
   --bg: #ffffff;
   --bg-2: #f4f8f6;
@@ -26,35 +25,6 @@
   --shadow-hover: 0 4px 20px rgba(0, 103, 71, 0.12), 0 2px 8px rgba(0,0,0,0.06);
   --glow-purple: 0 4px 24px rgba(0, 103, 71, 0.14), 0 2px 8px rgba(0,0,0,0.06);
   --glow-cyan: 0 4px 24px rgba(184, 146, 42, 0.16), 0 2px 8px rgba(0,0,0,0.06);
-  --theme-transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-  --noise-opacity: 0.025;
-}
-
-/* ── Dark mode ── */
-[data-theme="dark"] {
-  --bg: #06100b;
-  --bg-2: #0b1a12;
-  --bg-alt: #0e2018;
-  --bg-card: #0d1c14;
-  --purple: #00c882;
-  --purple-light: #00e896;
-  --purple-dim: rgba(0, 200, 130, 0.08);
-  --cyan: #f0c040;
-  --cyan-light: #fad878;
-  --cyan-dim: rgba(240, 192, 64, 0.08);
-  --amber: #f0c040;
-  --green: #00c882;
-  --text: #e0f5ec;
-  --text-muted: #4d8a6a;
-  --text-secondary: #8bbfa0;
-  --border: rgba(0, 200, 130, 0.12);
-  --border-strong: rgba(0, 200, 130, 0.28);
-  --border-cyan: rgba(240, 192, 64, 0.22);
-  --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.25);
-  --shadow-hover: 0 4px 20px rgba(0, 200, 130, 0.18), 0 2px 8px rgba(0,0,0,0.3);
-  --glow-purple: 0 4px 24px rgba(0, 200, 130, 0.22), 0 2px 8px rgba(0,0,0,0.3);
-  --glow-cyan: 0 4px 24px rgba(240, 192, 64, 0.22), 0 2px 8px rgba(0,0,0,0.3);
-  --noise-opacity: 0.04;
 }
 
 /* ── Aurora keyframes ── */
@@ -90,14 +60,6 @@
   100% { transform: translate(0,0); }
 }
 
-/* ── Global transition when theme switches ── */
-*, *::before, *::after {
-  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.25s ease, box-shadow 0.35s ease;
-}
-/* Override for elements that should NOT transition (animations break) */
-canvas, svg, .no-theme-transition {
-  transition: none !important;
-}
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
